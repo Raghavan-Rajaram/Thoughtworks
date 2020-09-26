@@ -1,0 +1,8 @@
+---
+ - hosts: server
+   become: true
+   ignore_errors: true
+   gather_facts: no
+   roles:
+      - thoughtworks
+

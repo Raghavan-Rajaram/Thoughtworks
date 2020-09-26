@@ -1,0 +1,9 @@
+---
+# - hosts: server
+#   tasks:
+     - name: "phpenmod mbstring"
+       command: phpenmod mbstring
+     - name: "phpenmod xml"  
+       command: phpenmod xml
+     - name: "restart apache2.service"
+       service: name=apache2.service state=restarted      

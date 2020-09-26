@@ -1,0 +1,54 @@
+---
+      - name: " installing packages "
+        apt:
+          name: "{{item}}"
+          state: present
+          update_cache: yes
+        with_items:
+            - apache2
+            - mysql-server
+            - php-mysql
+            - php
+            - libapache2-mod-php
+            - php-xml
+            - php-mbstring
+      - name: "creating a directory /var/lib/mediawiki"
+        file:
+          path: /var/lib/mediawiki
+          state: directory
+      - name: Unarchive mediawiki
+        unarchive:
+          src: https://releases.wikimedia.org/mediawiki/1.35/mediawiki-1.35.0.tar.gz
+          dest: /var/lib/mediawiki/
+          remote_src: yes
+      - name: " mysql root password is updated for all root accounts"
+        mysql_user:
+          name: new_mysql_user
+          login_unix_socket: /var/run/mysqld/mysqld.sock
+          password: THISpasswordSHOULDbeCHANGED
+          priv: '*.*:ALL,GRANT'
+          check_implicit_admin: true
+      - name: Create database
+        mysql_db:
+          login_unix_socket: /var/run/mysqld/mysqld.sock
+          name: my_wiki
+          login_host: mysql
+          login_user: root
+          login_password: redhat
+          state: present
+      - name: Create symbolic link
+        file:
+          src: /var/lib/mediawiki
+          dest: /var/www/html/mediawiki
+          state: link
+      - name: " copying local php file  "
+        copy:
+          src: /root/Downloads/LocalSettings.php
+          dest: /var/lib/mediawiki
+          force: yes
+      - name: "phpenmod mbstring"
+        command: phpenmod mbstring
+      - name: "phpenmod xml"
+        command: phpenmod xml
+      - name: "restart apache2.service"
+        service: name=apache2.service state=restarted

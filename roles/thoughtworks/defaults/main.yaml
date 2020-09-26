@@ -1,0 +1,14 @@
+#---
+#- hosts: server
+#  tasks:
+#   - name: Create symbolic link
+#     file:
+#         src: /var/lib/mediawiki
+#         dest: /var/www/html/mediawiki
+#         state: link
+#   - name: " copying local php file  "
+#     copy:
+#         src: /root/Downloads/LocalSettings.php
+#         dest: /var/lib/mediawiki
+#         force: yes
+
