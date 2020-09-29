@@ -1,4 +1,4 @@
-Confluence Page
-https://raghavanrajaram.atlassian.net/wiki/spaces/DW/pages/edit-v2/458756?draftShareId=177946f8-24f3-482d-82a4-d0f05442a9b5
+Google Drive 
 
-https://raghavanrajaram.atlassian.net/wiki/spaces/DW/pages/458756/MediaWiki
+https://docs.google.com/document/d/1MLFyca6jwVOj_nfReGor7aTRWNxJs9Qp1tUSxCnwWn8/edit#
+
