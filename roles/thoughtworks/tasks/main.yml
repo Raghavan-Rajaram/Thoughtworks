@@ -12,6 +12,8 @@
             - libapache2-mod-php
             - php-xml
             - php-mbstring
+        tags:
+            - packages
       - name: "creating a directory /var/lib/mediawiki"
         file:
           path: /var/lib/mediawiki
@@ -28,6 +30,8 @@
           password: THISpasswordSHOULDbeCHANGED
           priv: '*.*:ALL,GRANT'
           check_implicit_admin: true
+        tags:
+             - mysqluser
       - name: Create database
         mysql_db:
           login_unix_socket: /var/run/mysqld/mysqld.sock
@@ -36,6 +40,8 @@
           login_user: root
           login_password: redhat
           state: present
+        tags:
+             - database
       - name: Create symbolic link
         file:
           src: /var/lib/mediawiki
@@ -44,6 +50,8 @@
       - name: "phpenmod mbstring"
         command: phpenmod mbstring
       - name: "phpenmod xml"
-        command: phpenmod xml
+        command: phpenmod xmli
+        tags:
+            - phpenmod
       - name: "restart apache2.service"
         service: name=apache2.service state=restarted
